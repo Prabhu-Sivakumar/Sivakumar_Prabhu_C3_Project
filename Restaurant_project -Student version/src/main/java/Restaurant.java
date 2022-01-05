@@ -62,4 +62,7 @@ public class Restaurant {
         return name;
     }
 
+    public int getOrderValue(List<String> selectedMenus) {
+        return 0;
+    }
 }

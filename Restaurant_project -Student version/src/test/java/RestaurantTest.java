@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
 
 class RestaurantTest {
     Restaurant restaurant;
@@ -78,4 +81,20 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>ORDER VALUE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    @Test
+    public void getting_order_value_should_return_zero_when_the_selected_menu_names_passed_is_empty(){
+        List<String> selectedMenus = Arrays.asList();
+        int orderValue = restaurant.getOrderValue(selectedMenus);
+        assertThat(orderValue, equalTo(0));
+    }
+
+    @Test
+    public void getting_order_value_should_return_sum_of_prices_of_selected_menu_names_passed(){
+        List<String> selectedMenus = Arrays.asList("Sweet corn soup", "Vegetable lasagne");
+        int orderValue = restaurant.getOrderValue(selectedMenus);
+        assertThat(orderValue, equalTo(388));
+    }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<ORDER VALUE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
