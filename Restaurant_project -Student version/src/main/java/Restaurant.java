@@ -63,6 +63,6 @@ public class Restaurant {
     }
 
     public int getOrderValue(List<String> selectedMenus) {
-        return 0;
+        return selectedMenus.stream().mapToInt(name -> findItemByName(name).getPrice()).sum();
     }
 }
